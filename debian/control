@@ -7,7 +7,10 @@ Build-Depends:
  debhelper-compat (= 13),
  dh-sequence-python3,
  flit,
- python3-all
+ python3-all,
+# FIXME: why do I need this here?
+#   E: pybuild pybuild:353: build: plugin flit failed with: No module named 'MySQLdb'
+ python3-mysqldb,
 Standards-Version: 4.3.0
 Rules-Requires-Root: no
 VCS-Git: https://github.com/cyberitsolutions/cyber-mariadb-zfs-snapshot
