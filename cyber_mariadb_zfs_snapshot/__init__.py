@@ -2,6 +2,7 @@
 import argparse
 import contextlib
 import datetime
+import json
 import logging
 import subprocess
 
@@ -10,6 +11,7 @@ import MySQLdb                  # https://mysqlclient.readthedocs.io/
 
 __doc__ = """ like mylvmbackup but ZFS (not LVM) """
 __version__ = '0.1'
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -71,14 +73,14 @@ def expire(args):
 
 
 def guess_dataset():
-    proc = subprocess.run(
-        ['df', '--type=zfs', '--output=source', '/var/lib/mysql'],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.DEVNULL,
-        text=True)
-    if proc.returncode != 0:
-        return {}               # no default
-    heading, source = proc.stdout.splitlines()
-    if heading != 'Filesystem':
-        raise RuntimeError('df output is fucky', proc.stdout)
-    return {'default': source}
+    try:
+        stdout = subprocess.check_output(
+            ['findmnt',
+             '--json',
+             '--type=zfs',
+             '--output=source',
+             '--mountpoint=/var/lib/mysql'])
+        dataset = json.loads(stdout)['filesystems'][0]['source']
+        return {'default': dataset}
+    except:                     # NOQA: E722
+        return {}               # no guess -- you must be explicit
