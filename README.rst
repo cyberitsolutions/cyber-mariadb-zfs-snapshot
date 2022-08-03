@@ -11,6 +11,11 @@
 Prior art:
 
 * https://packages.debian.org/sid/mylvmbackup
+* https://github.com/cyberitsolutions/cyber-zfs-backup
+
+  We will not do any send/recv here; we will leave that to cyber-zfs-backup.
+  Arguably this script should be part of cyber-zfs-backup, but
+  I fucking hate mysql, so let's keep it separate for now.
 
 OK so the basic process is:
 
