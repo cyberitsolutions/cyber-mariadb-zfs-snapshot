@@ -1,5 +1,5 @@
-cyber-mariadb-zfs-snapshot (0.1) bullseye; urgency=medium
+cyber-mariadb-zfs-snapshot (0.2) bullseye; urgency=medium
 
   * Initial implementation
 
- -- Trent W. Buck <trentbuck@gmail.com>  Wed, 03 Aug 2022 18:34:22 +1000
+ -- Trent W. Buck <trentbuck@gmail.com>  Wed, 03 Aug 2022 23:04:15 +1000
