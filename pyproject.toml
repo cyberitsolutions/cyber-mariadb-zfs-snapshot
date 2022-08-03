@@ -7,8 +7,8 @@ build-backend = "flit_core.buildapi"
 module = "cyber_mariadb_zfs_snapshot"
 author = "Trent W. Buck"
 requires = [
-    'mysqlclient',
+    "mysqlclient",
     ]
 
-[tools.flit.entry-points]
-cyber-mariadb-zfs-snapshot = "cyber_mariadb_zfs_snapshot:main"
+[tool.flit.scripts]
+"cyber-mariadb-zfs-snapshot" = "cyber_mariadb_zfs_snapshot:main"
