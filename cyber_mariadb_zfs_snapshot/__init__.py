@@ -36,7 +36,7 @@ def snapshot(args):
 
 # https://mariadb.com/kb/en/backup-and-restore-overview/#filesystem-snapshots
 @contextlib.contextmanager
-def lock_database(args):
+def lock_database():
     with MySQLdb._mysql.connect() as conn:
         with conn.cursor() as cursor:
             with cursor:        # transaction
