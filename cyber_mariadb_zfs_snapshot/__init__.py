@@ -65,7 +65,7 @@ def expire(args):
     # Swap to newest first.
     snapshots.reverse()
     # Keep the last 10.
-    snapshots_to_expire = snapshots[10:]
+    snapshots_to_expire = snapshots[11:]
 
     if not snapshots_to_expire:
         logging.debug('No snapshots to expire')
