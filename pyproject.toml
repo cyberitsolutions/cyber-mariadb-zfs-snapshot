@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+
+[tool.flit.metadata]
+module = "cyber_mariadb_zfs_snapshot"
+author = "Trent W. Buck"
+requires = [
+    'mysqldb',
+    ]

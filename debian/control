@@ -1,0 +1,27 @@
+Source: cyber-zfs-backup
+Section: admin
+Priority: optional
+Maintainer: Trent W. Buck <twb@cyber.com.au>
+Uploaders: Trent W. Buck <trentbuck@gmail.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-sequence-python3,
+ dh-sequence-systemd,
+ flit,
+ python3-all
+Standards-Version: 4.3.0
+Rules-Requires-Root: no
+VCS-Git: https://github.com/cyberitsolutions/cyber-mariadb-zfs-snapshot
+
+Package: cyber-mariadb-zfs-snapshot
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends},
+ zfsutils-linux,
+Enhances: zfsutils-linux
+Description: like mylvmbackup but ZFS (not LVM)
+ This package pretty much just implements these instructions:
+ https://mariadb.com/kb/en/backup-and-restore-overview/#filesystem-snapshots
+ .
+ It runs daily, makes a quiescent ZFS snapshot of /var/lib/mysql, then stops.
+ .
+ MariaDB/MySQL must be running at the time.

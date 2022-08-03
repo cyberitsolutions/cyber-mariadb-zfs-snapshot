@@ -1,0 +1,59 @@
+[Service]
+ExecStart=cyber-mariadb-zfs-snapshot
+
+# FIXME: do something like this:
+#
+#    DynamicUser=yes
+#    User=cyber-mariadb-zfs-snapshot
+#    ExecStart=!zfs    allow -u cyber-mariadb-zfs-snapshot snapshot,destroy,mount $MARIADB_ZFS_DATASET
+#    ExecStart=!-zfs unallow -u cyber-mariadb-zfs-snapshot snapshot,destroy,mount $MARIADB_ZFS_DATASET
+#
+# The only problem is, MySQL needs some kind of DB admin privileges, and
+# we don't really want to supply them here...
+
+# Won't work if MariaDB is down.
+[Unit]
+Wants=mysql.service
+After=mysql.service
+
+# Generic systemd "default-deny" policy.
+[Service]
+PrivateNetwork=yes
+DynamicUser=yes
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX
+RestrictNamespaces=yes
+DevicePolicy=closed
+IPAddressDeny=any
+NoNewPrivileges=yes
+PrivateDevices=yes
+PrivateMounts=yes
+PrivateTmp=yes
+PrivateUsers=yes
+ProtectControlGroups=yes
+ProtectHome=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+ProtectSystem=strict
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+UMask=0077
+# New in systemd/buster-backports (since buster)
+ProtectClock=yes
+ProtectKernelLogs=yes
+RestrictSUIDSGID=yes
+ProtectHostname=yes
+
+# ALLOW "zfs snapshot" and "zfs destroy".
+[Service]
+# zfs(8) needs write access to /dev/zfs (char-misc).
+PrivateDevices=no
+DeviceAllow=/dev/zfs
+CapabilityBoundingSet=CAP_SYS_ADMIN
+# Why does zfs need a full user list?
+DynamicUser=no
+PrivateUsers=no

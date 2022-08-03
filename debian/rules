@@ -1,0 +1,5 @@
+#!/usr/bin/make -f
+export PYBUILD_NAME=cyber_mariadb_zfs_snapshot
+export PYBUILD_SYSTEM=flit
+%:
+	dh $@ --buildsystem=pybuild
