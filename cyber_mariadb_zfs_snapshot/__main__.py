@@ -12,8 +12,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         'dataset',
-        help='What to snapshot (e.g. rpool/var/lib/mysql)')
-    parser.add_defaults(
+        help='What to snapshot (e.g. rpool/ROOT/var/lib/mysql)',
+        **guess_dataset())
+    parser.set_defaults(
         snapshot_prefix='cyber_mariadb_zfs_snapshot',
         timestamp=int(datetime.datetime.now().timestamp()))
     args = parser.parse_args()
@@ -64,6 +65,20 @@ def expire(args):
         subprocess.check_call([
             '/sbin/zfs', 'destroy', '-r',
             f'{args.dataset}@{",".join(snapshots_to_expire)}'])
+
+
+def guess_dataset():
+    proc = subprocess.run(
+        ['df', '--type=zfs', '--output=source', '/var/lib/mysql'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True)
+    if proc.returncode != 0:
+        return {}               # no default
+    heading, source = proc.stdout.splitlines()
+    if heading != 'Filesystem':
+        raise RuntimeError('df output is fucky', proc.stdout)
+    return {'default': source}
 
 
 if __name__ == '__main__':
