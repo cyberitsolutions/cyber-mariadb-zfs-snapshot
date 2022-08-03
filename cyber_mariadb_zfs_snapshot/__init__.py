@@ -37,10 +37,10 @@ def snapshot(args):
 # https://mariadb.com/kb/en/backup-and-restore-overview/#filesystem-snapshots
 @contextlib.contextmanager
 def lock_database():
-    with MySQLdb._mysql.connect() as conn:
+    with contextlib.closing(MySQLdb._mysql.connect()) as conn:
         with conn.cursor() as cursor:
             # FIXME: this API doesn't offer with/as to make a transaction???
-            # with cursor:        # transaction
+            with cursor:        # transaction
                 cursor.execute('FLUSH TABLES WITH READ LOCK')
                 yield
                 cursor.execute('UNLOCK TABLES')
