@@ -10,6 +10,11 @@ ExecStart=cyber-mariadb-zfs-snapshot
 #
 # The only problem is, MySQL needs some kind of DB admin privileges, and
 # we don't really want to supply them here...
+#
+# UPDATE: derp, I can just have two more lines!
+#
+#    ExecStart=!mariadb  "--execute=GRANT LOCK ON *.* TO 'cyber-mariadb-zfs-snapshot'@'localhost'"
+#    ExecStart=!-mariadb "--execute=REVOKE ALL FROM 'cyber-mariadb-zfs-snapshot'@'localhost'"
 
 # Won't work if MariaDB is down.
 [Unit]
