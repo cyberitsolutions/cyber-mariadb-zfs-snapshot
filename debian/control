@@ -6,7 +6,6 @@ Uploaders: Trent W. Buck <trentbuck@gmail.com>
 Build-Depends:
  debhelper-compat (= 13),
  dh-sequence-python3,
- dh-sequence-systemd,
  flit,
  python3-all
 Standards-Version: 4.3.0
