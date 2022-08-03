@@ -1,10 +1,14 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["flit_core >=3,<4"]
+build-backend = "flit_core.buildapi"
 
 
 [tool.flit.metadata]
 module = "cyber_mariadb_zfs_snapshot"
 author = "Trent W. Buck"
 requires = [
-    'mysqldb',
+    'mysqlclient',
     ]
+
+[tools.flit.entry-points]
+cyber-mariadb-zfs-snapshot = "cyber_mariadb_zfs_snapshot:main"
