@@ -42,8 +42,12 @@ def lock_database():
         # FIXME: this API doesn't have with/as for clean transaction commit/rollback???
         # THIS IS NOT CONFORMANT TO https://peps.python.org/pep-0249 AT FUCKING ALL.
         conn.query('FLUSH TABLES WITH READ LOCK')
+        if (result := conn.store_result()) is not None:
+            raise RuntimeError('Something fucky happened', result)
         yield
         conn.query('UNLOCK TABLES')
+        if (result := conn.store_result()) is not None:
+            raise RuntimeError('Something fucky happened', result)
 
 
 def expire(args):
