@@ -16,7 +16,7 @@ __version__ = '0.1'
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'dataset',
+        '--dataset',
         help='What to snapshot (e.g. rpool/ROOT/var/lib/mysql)',
         **guess_dataset())
     parser.set_defaults(
@@ -81,6 +81,6 @@ def guess_dataset():
              '--output=source',
              '--mountpoint=/var/lib/mysql'])
         dataset = json.loads(stdout)['filesystems'][0]['source']
-        return {'default': dataset}
+        return {'required': False, 'default': dataset}
     except:                     # NOQA: E722
-        return {}               # no guess -- you must be explicit
+        return {'required': True}  # no guess -- you must be explicit
