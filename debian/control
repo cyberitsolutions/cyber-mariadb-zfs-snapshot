@@ -1,4 +1,4 @@
-Source: cyber-zfs-backup
+Source: cyber-mariadb-zfs-snapshot
 Section: admin
 Priority: optional
 Maintainer: Trent W. Buck <twb@cyber.com.au>
