@@ -39,7 +39,8 @@ def snapshot(args):
 def lock_database():
     with MySQLdb._mysql.connect() as conn:
         with conn.cursor() as cursor:
-            with cursor:        # transaction
+            # FIXME: this API doesn't offer with/as to make a transaction???
+            # with cursor:        # transaction
                 cursor.execute('FLUSH TABLES WITH READ LOCK')
                 yield
                 cursor.execute('UNLOCK TABLES')
