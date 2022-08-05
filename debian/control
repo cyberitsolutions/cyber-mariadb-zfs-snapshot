@@ -19,7 +19,7 @@ Package: cyber-mariadb-zfs-snapshot
 Architecture: all
 Depends: ${misc:Depends}, ${python3:Depends},
  zfsutils-linux,
-Recommends: default-mysql-server
+Recommends: default-mysql-server (>> 10.4~)
 Enhances: zfsutils-linux, default-mysql-server
 Description: like mylvmbackup but ZFS (not LVM)
  This package pretty much just implements these instructions:

@@ -22,6 +22,12 @@ OK so the basic process is:
 1. open a connection to MySQL (and keep it open!)
 2. open a cursor and a transaction, I guess, for good measure.
 3. issue ``FLUSH TABLES WITH READ LOCK``
+
+   UPDATE::
+
+      <montywi> twb, note that in later MariaDB, you can do better than FLUSH TABLES WITH READ LOCK. See https://mariadb.com/kb/en/backup-stage/#using-backup-stage-commands-with-storage-snapshots
+      <montywi> twb, and also https://mariadb.com/kb/en/storage-snapshots-and-backup-stage-commands/
+
 4. run ``zfs snapshot create <something>/var/lib/mysql@<my cool app>-<unix timestamp>``
 5. close the MySQL connection
 

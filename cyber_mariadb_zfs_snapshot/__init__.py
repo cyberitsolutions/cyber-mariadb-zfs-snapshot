@@ -41,11 +41,12 @@ def lock_database():
         # FIXME: this API doesn't have cursors AT ALL???
         # FIXME: this API doesn't have with/as for clean transaction commit/rollback???
         # THIS IS NOT CONFORMANT TO https://peps.python.org/pep-0249 AT FUCKING ALL.
-        conn.query('FLUSH TABLES WITH READ LOCK')
+        conn.query('BACKUP STAGE START')
+        conn.query('BACKUP STAGE BLOCK COMMIT')
         if (result := conn.store_result()) is not None:
             raise RuntimeError('Something fucky happened', result)
         yield
-        conn.query('UNLOCK TABLES')
+        conn.query('BACKUP STAGE END')
         if (result := conn.store_result()) is not None:
             raise RuntimeError('Something fucky happened', result)
 
