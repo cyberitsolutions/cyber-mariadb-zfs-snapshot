@@ -1,3 +1,10 @@
+cyber-mariadb-zfs-snapshot (0.3) bookworm; urgency=medium
+
+  * Build for Debian 12 bookworm.
+  * Use https://mariadb.com/kb/en/storage-snapshots-and-backup-stage-commands/
+
+ -- Trent W. Buck <trentbuck@gmail.com>  Mon, 19 Jun 2023 17:46:03 +1000
+
 cyber-mariadb-zfs-snapshot (0.2) bullseye; urgency=medium
 
   * Initial implementation
