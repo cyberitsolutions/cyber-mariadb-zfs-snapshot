@@ -1,3 +1,9 @@
+cyber-mariadb-zfs-snapshot (0.4) bookworm; urgency=medium
+
+  * It's "BACKUP STAGE BLOCK_COMMIT" not "BACKUP STAGE BLOCK COMMIT".
+
+ -- Trent W. Buck <trentbuck@gmail.com>  Sun, 02 Jul 2023 22:55:39 +1000
+
 cyber-mariadb-zfs-snapshot (0.3) bookworm; urgency=medium
 
   * Build for Debian 12 bookworm.
