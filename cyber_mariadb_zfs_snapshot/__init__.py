@@ -42,7 +42,7 @@ def lock_database():
         # FIXME: this API doesn't have with/as for clean transaction commit/rollback???
         # THIS IS NOT CONFORMANT TO https://peps.python.org/pep-0249 AT FUCKING ALL.
         conn.query('BACKUP STAGE START')
-        conn.query('BACKUP STAGE BLOCK COMMIT')
+        conn.query('BACKUP STAGE BLOCK_COMMIT')
         if (result := conn.store_result()) is not None:
             raise RuntimeError('Something fucky happened', result)
         yield
